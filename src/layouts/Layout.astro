@@ -23,22 +23,27 @@ const { title = "Emmanuella Ikirezi" } = Astro.props;
 </style>
 
 <script>
-  import Lenis from '@studio-freight/lenis';
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import Lenis from '@studio-freight/lenis'
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { initAnimations } from '../scripts/animations'
 
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger)
 
+  // Smooth scroll
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
+  })
 
   function raf(time: number) {
-    lenis.raf(time);
-    ScrollTrigger.update();
-    requestAnimationFrame(raf);
+    lenis.raf(time)
+    ScrollTrigger.update()
+    requestAnimationFrame(raf)
   }
 
-  requestAnimationFrame(raf);
+  requestAnimationFrame(raf)
+
+  // Init all animations
+  initAnimations()
 </script>
