@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles this */
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Design Tokens ── */
+:root {
+  /* Colors */
+  --bg:         #0A0705;
+  --surface:    #160E08;
+  --surface2:   #1F1409;
+  --burnt:      #B84A1E;
+  --rust:       #7A2E0A;
+  --olive:      #6A6828;
+  --sand:       #C9A87A;
+  --cream:      #EDE0CC;
+  --dust:       #6B5C49;
+  --border:     rgba(237, 224, 204, 0.07);
+  --line:       rgba(237, 224, 204, 0.12);
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Spacing */
+  --space-xs:   8px;
+  --space-sm:   16px;
+  --space-md:   32px;
+  --space-lg:   64px;
+  --space-xl:   128px;
+
+  /* Layout */
+  --max-width:  1280px;
+  --radius:     2px;
+}
+
+/* ── Typography Utilities ── */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 300;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--olive);
+}
+
+.text-dust   { color: var(--dust); }
+.text-sand   { color: var(--sand); }
+.text-burnt  { color: var(--burnt); }
+.text-cream  { color: var(--cream); }
+
+/* ── Section Base ── */
+section {
+  width: 100%;
+  padding: var(--space-xl) var(--space-md);
+}
+
+/* ── Divider ── */
+.divider {
+  width: 100%;
+  height: 0.5px;
+  background: var(--line);
+}
