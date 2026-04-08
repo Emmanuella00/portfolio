@@ -173,5 +173,60 @@ export function initAnimations() {
     stagger: 0.1,
     ease: 'power4.out'
   })
+  
+  // ── Custom Cursor ──
+  const cursor = document.createElement('div')
+  const cursorRing = document.createElement('div')
 
+  cursor.id = 'cursor-dot'
+  cursorRing.id = 'cursor-ring'
+
+  document.body.appendChild(cursor)
+  document.body.appendChild(cursorRing)
+
+  let ringX = 0, ringY = 0
+  let dotX = 0, dotY = 0
+  let rafId
+
+  document.addEventListener('mousemove', e => {
+    dotX = e.clientX
+    dotY = e.clientY
+    cursor.style.left = dotX + 'px'
+    cursor.style.top = dotY + 'px'
+  })
+
+  function animateRing() {
+    ringX += (dotX - ringX) * 0.1
+    ringY += (dotY - ringY) * 0.1
+    cursorRing.style.left = ringX + 'px'
+    cursorRing.style.top = ringY + 'px'
+    rafId = requestAnimationFrame(animateRing)
+  }
+
+  animateRing()
+
+  // Expand ring on hoverable elements
+  const hoverTargets = 'a, button, .project-card, .skills-list li, .nav-links a'
+
+  document.querySelectorAll(hoverTargets).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+     cursorRing.classList.add('cursor-ring--hover')
+     cursor.classList.add('cursor-dot--hover')
+    })
+    el.addEventListener('mouseleave', () => {
+     cursorRing.classList.remove('cursor-ring--hover')
+     cursor.classList.remove('cursor-dot--hover')
+    })
+  })
+
+  // Hide on leave, show on enter
+  document.addEventListener('mouseleave', () => {
+    cursor.style.opacity = '0'
+    cursorRing.style.opacity = '0'
+  })
+
+  document.addEventListener('mouseenter', () => {
+    cursor.style.opacity = '1'
+    cursorRing.style.opacity = '1'
+  })
 }

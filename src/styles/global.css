@@ -107,3 +107,51 @@ section {
 .contact-title {
   will-change: transform, opacity;
 }
+
+/* ── Custom Cursor ── */
+* { cursor: none !important; }
+
+#cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--burnt);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease, transform 0.15s ease;
+  will-change: left, top;
+}
+
+#cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 0.5px solid rgba(184, 74, 30, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.23,1,0.32,1),
+              height 0.4s cubic-bezier(0.23,1,0.32,1),
+              border-color 0.4s ease,
+              opacity 0.3s ease;
+  will-change: left, top;
+}
+
+#cursor-dot.cursor-dot--hover {
+  transform: translate(-50%, -50%) scale(0);
+}
+
+#cursor-ring.cursor-ring--hover {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(184, 74, 30, 0.8);
+}
+
+/* Restore cursor on mobile — custom cursor doesn't apply */
+@media (hover: none) {
+  * { cursor: auto !important; }
+  #cursor-dot, #cursor-ring { display: none; }
+}
