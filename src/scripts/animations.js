@@ -33,10 +33,10 @@ export function initAnimations() {
       duration: 0.8,
       ease: 'power3.out'
     }, '-=0.5')
-    .from('.hero-geo', {
+    .from('#paintingWrap', {
       opacity: 0,
-      scale: 0.8,
-      duration: 1.5,
+      scale: 0.95,
+      duration: 1.8,
       ease: 'power3.out'
     }, '-=1.2')
 
@@ -149,17 +149,62 @@ export function initAnimations() {
     ease: 'power3.out'
   })
 
-  // ── Hero Parallax Circle ──
-  gsap.to('.hero-geo', {
+  // ── Hero Painting Scroll Parallax ──
+  gsap.to('#heroParallaxImg', {
     scrollTrigger: {
       trigger: '#hero',
       start: 'top top',
       end: 'bottom top',
       scrub: 1.5,
     },
-    y: -120,
+    y: -80,
     ease: 'none'
   })
+
+  // ── Hero Painting Mouse Parallax ──
+  const hero = document.querySelector('#hero')
+  const paintingWrap = document.querySelector('#paintingWrap')
+  const paintingImg = document.querySelector('#heroParallaxImg')
+
+  if (hero && paintingWrap && paintingImg) {
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect()
+      const nx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2)
+      const ny = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2)
+
+      gsap.to(paintingWrap, {
+        x: nx * -22,
+        y: ny * -14,
+        duration: 1.2,
+        ease: 'power2.out'
+      })
+
+      gsap.to(paintingImg, {
+        scale: 1.06,
+        x: nx * -6,
+        y: ny * -4,
+        duration: 1.4,
+        ease: 'power2.out'
+      })
+    })
+
+    hero.addEventListener('mouseleave', () => {
+      gsap.to(paintingWrap, {
+        x: 0,
+        y: 0,
+        duration: 1.5,
+        ease: 'power3.out'
+      })
+
+      gsap.to(paintingImg, {
+        scale: 1,
+        x: 0,
+        y: 0,
+        duration: 1.5,
+        ease: 'power3.out'
+      })
+    })
+  }
 
   // ── Dividers ──
   gsap.from('.divider', {
@@ -173,7 +218,7 @@ export function initAnimations() {
     stagger: 0.1,
     ease: 'power4.out'
   })
-  
+
   // ── Custom Cursor ──
   const cursor = document.createElement('div')
   const cursorRing = document.createElement('div')
@@ -210,12 +255,12 @@ export function initAnimations() {
 
   document.querySelectorAll(hoverTargets).forEach(el => {
     el.addEventListener('mouseenter', () => {
-     cursorRing.classList.add('cursor-ring--hover')
-     cursor.classList.add('cursor-dot--hover')
+      cursorRing.classList.add('cursor-ring--hover')
+      cursor.classList.add('cursor-dot--hover')
     })
     el.addEventListener('mouseleave', () => {
-     cursorRing.classList.remove('cursor-ring--hover')
-     cursor.classList.remove('cursor-dot--hover')
+      cursorRing.classList.remove('cursor-ring--hover')
+      cursor.classList.remove('cursor-dot--hover')
     })
   })
 
